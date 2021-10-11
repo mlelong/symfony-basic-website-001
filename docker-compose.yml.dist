@@ -1,0 +1,54 @@
+version:  "3.0"
+
+services:
+    app:
+        build:
+            context: .
+            args:
+                APP_NAME: 'abw'
+                COMPOSER_OPTION: '--no-dev'
+        volumes:
+            - data-assets:/www/public/build
+            - data-vendor:/www/vendor
+        environment:
+            MAILER_DSN: ${MAILER_DSN}
+            NEWRELIC_API_KEY: ${NEWRELIC_API_KEY}
+        restart: always
+    node:
+        build:
+            context: .
+            dockerfile: docker/node/Dockerfile
+        volumes:
+            - data-node:/www/node_modules
+            - data-vendor:/www/vendor
+            - data-assets:/www/public/build
+        command: bash -c "yarn install && yarn encore production"
+    front:
+        build:
+            context: .
+            dockerfile: ./docker/front/Dockerfile
+        ports:
+            - "80:80"
+            - "443:443"
+        links:
+            - "app:app"
+        volumes:
+            - data-assets:/www/public/build
+            - /certbot/conf:/etc/letsencrypt
+            - /certbot/www:/var/www/certbot
+        restart: always
+        environment:
+            HOST_PREFIX: www
+    certbot:
+        build: docker/certbot
+        volumes:
+            - /certbot/conf:/etc/letsencrypt
+            - /certbot/www:/var/www/certbot
+        restart: always
+        environment:
+            HOST_PREFIX: www
+
+volumes:
+    data-node: {}
+    data-vendor: {}
+    data-assets: {}

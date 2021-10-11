@@ -1,0 +1,51 @@
+version:  "3.0"
+
+services:
+    mysql:
+        image: mysql:5.7
+        command: ["--default-authentication-plugin=mysql_native_password"]
+        volumes:
+            - ./data/sql:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: database
+            MYSQL_USER: user
+            MYSQL_PASSWORD: password
+            
+    app:
+        build:
+            context: .
+            args:
+                APP_NAME: 'myapp'
+                COMPOSER_OPTION: ''
+        depends_on:
+            - mysql                
+        volumes:
+            - ./:/www:cached
+            - appdata:/www/app/vendor # ignore vendor folder
+            - appdata:/www/app/var/cache # ignore var cache folder
+            - appdata:/www/app/var/logs # ignore var logs folder
+        restart: always
+    
+    front:
+        build:
+            context: .
+            dockerfile: ./docker/front/Dockerfile
+        ports:
+            - "80:80"
+        links:
+            - "app:app"
+        volumes:
+            - ./public/build:/www/app/public/build
+        restart: always
+        environment:
+            HOST_PREFIX: dev
+
+volumes:
+    appdata: ~
+
+
+    
+    
+    
