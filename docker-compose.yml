@@ -1,7 +1,7 @@
 version:  "3.0"
 
 services:
-    mysql:
+    db:
         image: mysql:5.7
         command: ["--default-authentication-plugin=mysql_native_password"]
         volumes:
@@ -10,8 +10,8 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_DATABASE: database
-            MYSQL_USER: user
-            MYSQL_PASSWORD: password
+            MYSQL_USER: dbuser
+            MYSQL_PASSWORD: dbpassword
             
     app:
         build:
@@ -20,14 +20,17 @@ services:
                 APP_NAME: 'myapp'
                 COMPOSER_OPTION: ''
         depends_on:
-            - mysql                
+            - db   
+        links:
+            - db            
         volumes:
             - ./:/www:cached
-            - appdata:/www/app/vendor # ignore vendor folder
-            - appdata:/www/app/var/cache # ignore var cache folder
-            - appdata:/www/app/var/logs # ignore var logs folder
+            - ignore:/www/app/vendor    # ignore vendor folder
+            - ignore:/www/app/var/cache # ignore var cache folder
+            - ignore:/www/app/var/logs  # ignore var logs folder
         restart: always
-    
+
+
     front:
         build:
             context: .
@@ -41,10 +44,25 @@ services:
         restart: always
         environment:
             HOST_PREFIX: dev
+            
+    phpmyadmin:
+        depends_on:
+            - db
+        image: phpmyadmin/phpmyadmin
+        links:
+            - db
+        restart: always
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: password            
 
 volumes:
-    appdata: ~
-
+    ignore: ~
+    data-node: {}
+    data-vendor: {}
+    data-assets: {}
 
     
     
