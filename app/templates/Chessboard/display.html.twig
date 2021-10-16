@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Chessboard{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+
+
+<div class="chessboard">
+{% for column in 0..7 -%}
+    <div>
+    {% if column is divisible by(2) %}
+        {% set index = 0 %}
+    {% else %}
+        {% set index = 1 %}
+    {% endif %}    
+    {% for row in 0..7 -%}
+        <div class="square {{ (index is divisible by(2)) ? 'square-white' : 'square-black' }}"></div>
+        {% set index = index+1 -%}
+    {% endfor -%}
+    </div>
+{% endfor -%}    
+</div>    
+
+{% endblock %}
