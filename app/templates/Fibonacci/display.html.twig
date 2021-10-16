@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fibonacci numbers(N){% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+
+Fibonacci numbers ({{length}}) = <ul>{% for key, number in fibonacciNumbers %}<li>{{ number }}{{ loop.last ?' !':' '}}</li>{% endfor %}</ul>
+
+{% endblock %}
