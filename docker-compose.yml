@@ -30,7 +30,15 @@ services:
             - ignore:/www/app/var/logs  # ignore var logs folder
         restart: always
 
-
+    node:
+        build:
+            context: .
+            dockerfile: docker/node/Dockerfile
+        volumes:
+#            - ./public/build:/www/app/public/build
+            - ./:/www
+        command: bash -c "yarn install && yarn encore dev --watch"
+    
     front:
         build:
             context: .
@@ -40,7 +48,7 @@ services:
         links:
             - "app:app"
         volumes:
-            - ./public/build:/www/app/public/build
+            - ./app/public/build:/www/app/public/build
         restart: always
         environment:
             HOST_PREFIX: dev

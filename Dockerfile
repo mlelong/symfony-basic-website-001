@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libxml2-dev
 
-RUN docker-php-ext-install opcache soap
+RUN docker-php-ext-install pdo_mysql opcache soap
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -24,7 +24,7 @@ COPY ./docker/php/perf.ini /usr/local/etc/php/conf.d/perf.ini
 
 COPY . /www
 
-WORKDIR /www
+WORKDIR /www/app
 
 # composer dev
 #RUN composer install ${COMPOSER_OPTION} --optimize-autoloader --no-interaction
@@ -34,4 +34,4 @@ WORKDIR /www
 #RUN php bin/console cache:clear
 
 # droits d'écriture (cache & logs)
-RUN chmod 777 -R  app/var
+RUN chmod 777 -R  ./var
