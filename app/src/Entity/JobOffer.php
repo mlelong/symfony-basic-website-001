@@ -25,7 +25,7 @@ class JobOffer
     private $title;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="text")
      */
     private $description;
 
@@ -41,10 +41,8 @@ class JobOffer
 
     public function __construct()
     {
-        $this->createdAt = new DateTime();        
-        $this->candidacies = new ArrayCollection();
-        parent::__construct();
-        
+        $this->createdAt = new \DateTime();        
+        $this->candidacies = new ArrayCollection();        
     }
 
     public function getId(): ?int
