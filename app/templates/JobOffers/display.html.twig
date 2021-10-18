@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Job Offers{% endblock %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+{% endblock %}
+
+{% block body %}
+    <div>
+    <div><h1>Nos offres :</h1></div> 
+    {% for jobOffer in jobOffers %}
+        <div><h2>Offre n°{{ jobOffer.id }} : {{ jobOffer.title }} - <em>Posté le {{ jobOffer.createdAt|date('d/m/Y') }}</em></h2></div>
+        <div style="border: 1px solid black; padding:10px">{{ jobOffer.description|nl2br }}</div>
+        <br>
+        <div>Les candidats :</div>
+        <div>
+        <ul>
+        {% for candidacies in jobOffer.candidacies %}
+            <li>{{ candidacies.createdAt|date('d/m/Y') }} : {{ candidacies.candidate.firstname }} {{ candidacies.candidate.name }}</li>
+        {% else %}
+            <li><em>Pas de candidat</em></li>        
+        {% endfor %}
+        </ul>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
