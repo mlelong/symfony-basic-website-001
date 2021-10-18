@@ -5,17 +5,15 @@ namespace App\Service;
 class FibonacciCalculator
 {
     
-    private $numbers = [
-                        0 => 0, 
-                        1 => 1, 
-                       ];
+    private $numbers;
     
     public function calculateFibonacciNumbers(int $length): bool
     {
-        
         if ($length < 0) {
             throw new \exception('length should be positive number');    
         }
+
+        $this->numbers = [0, 1];
         
         if ($length == 0) {
             unset($this->numbers[1]);
