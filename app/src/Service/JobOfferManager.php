@@ -6,7 +6,6 @@ use App\Repository\JobOfferRepository;
 
 class JobOfferManager
 { 
-
     private $jobOfferRepository;
 
     public function __construct(JobOfferRepository $jobOfferRepository) {
@@ -14,10 +13,10 @@ class JobOfferManager
         $this->jobOfferRepository = $jobOfferRepository;
     }
     
-    public function getJobOffersAndCandicacies(): array
+    public function getJobOffersAndCandidacies(): array
     {
 
-        $results = $this->jobOfferRepository->findJobOffersAndCandicacies();
+        $results = $this->jobOfferRepository->findJobOffersAndCandidacies();
         return $results;        
     }    
 }

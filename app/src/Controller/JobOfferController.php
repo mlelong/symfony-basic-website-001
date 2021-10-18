@@ -16,7 +16,7 @@ class JobOfferController extends AbstractController
     */
     public function display(JobOfferManager $jobOfferManager): Response
     { 
-        $jobOffers = $jobOfferManager->getJobOffersAndCandicacies();
+        $jobOffers = $jobOfferManager->getJobOffersAndCandidacies();
 
         return $this->render('JobOffers/display.html.twig', [
             'jobOffers' => $jobOffers,

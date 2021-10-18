@@ -19,12 +19,12 @@ class JobOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, JobOffer::class);
     }
     
-    public function findJobOffersAndCandicacies() {
+    public function findJobOffersAndCandidacies() {
         
         $qb = $this->createQueryBuilder('joboffer')
             ->leftjoin('joboffer.candidacies', 'candidacy')
             ->leftjoin('candidacy.candidate', 'candidate')
-            ->orderBy('joboffer.id', 'DESC')
+            ->orderBy('joboffer.id', 'asc')
             ->setMaxResults(10)
             ;
             
