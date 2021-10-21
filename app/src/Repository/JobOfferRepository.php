@@ -19,7 +19,7 @@ class JobOfferRepository extends ServiceEntityRepository
         parent::__construct($registry, JobOffer::class);
     }
     
-    public function findJobOffersAndCandidacies() {
+    public function findJobOffersAndCandidacies(int $jobId = null) {
         
         $qb = $this->createQueryBuilder('joboffer')
             ->leftjoin('joboffer.candidacies', 'candidacy')
@@ -27,6 +27,11 @@ class JobOfferRepository extends ServiceEntityRepository
             ->orderBy('joboffer.id', 'asc')
             ->setMaxResults(10)
             ;
+
+        if ($jobId) {
+            $qb->andWhere('joboffer.id = :jobid')
+               ->setParameter('jobid', $jobId);
+        }
             
         return $qb
                     ->getQuery()

@@ -13,10 +13,9 @@ class JobOfferManager
         $this->jobOfferRepository = $jobOfferRepository;
     }
     
-    public function getJobOffersAndCandidacies(): array
+    public function getJobOffersAndCandidacies(int $jobId = null): array
     {
-
-        $results = $this->jobOfferRepository->findJobOffersAndCandidacies();
+        $results = $this->jobOfferRepository->findJobOffersAndCandidacies($jobId);
         return $results;        
     }    
 }

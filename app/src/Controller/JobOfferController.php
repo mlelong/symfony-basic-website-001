@@ -12,11 +12,12 @@ class JobOfferController extends AbstractController
 {
 
     /**
-    * @Route("/joboffers/display")
+    * @Route("/joboffers/display/{jobId}")
     */
-    public function display(JobOfferManager $jobOfferManager): Response
-    { 
-        $jobOffers = $jobOfferManager->getJobOffersAndCandidacies();
+    public function display(JobOfferManager $jobOfferManager, int $jobId = null): Response
+    {
+
+        $jobOffers = $jobOfferManager->getJobOffersAndCandidacies($jobId);
 
         return $this->render('JobOffers/display.html.twig', [
             'jobOffers' => $jobOffers,
