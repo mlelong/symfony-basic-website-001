@@ -11,7 +11,7 @@ class FibonacciController extends AbstractController
 {
 
     /**
-    * @Route("/fibonacci/display/{length}")
+    * @Route("/fibonacci/display/{length?1}")
     */
     public function display(FibonacciCalculator $fibonacciCalculator, int $length): Response
     {
