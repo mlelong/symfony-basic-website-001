@@ -12,7 +12,7 @@ services:
             MYSQL_DATABASE: database
             MYSQL_USER: dbuser
             MYSQL_PASSWORD: dbpassword
-            
+
     app:
         build:
             context: .
@@ -20,9 +20,7 @@ services:
                 APP_NAME: 'myapp'
                 COMPOSER_OPTION: ''
         depends_on:
-            - db   
-        links:
-            - db            
+            - db
         volumes:
             - ./:/www:cached
             - ignore:/www/app/vendor    # ignore vendor folder
@@ -57,8 +55,6 @@ services:
         depends_on:
             - db
         image: phpmyadmin/phpmyadmin
-        links:
-            - db
         restart: always
         ports:
             - 8080:80
@@ -68,10 +64,6 @@ services:
 
 volumes:
     ignore: ~
-    data-node: {}
-    data-vendor: {}
-    data-assets: {}
-
     
     
     
