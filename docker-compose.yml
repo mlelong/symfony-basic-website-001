@@ -30,18 +30,18 @@ services:
         build:
             context: .
             dockerfile: docker/node/Dockerfile
+        depends_on:
+            - app
         volumes:
             - ./:/www
         command: bash -c "yarn install && yarn encore dev --watch"
-    
+
     front:
         build:
             context: .
             dockerfile: ./docker/front/Dockerfile
         ports:
             - "80:80"
-        links:
-            - "app:app"
         volumes:
             - ./app/public/build:/www/app/public/build
         restart: always

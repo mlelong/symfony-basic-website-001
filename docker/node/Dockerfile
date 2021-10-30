@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:16.13.0
 
 RUN apt-get update && \
 	apt-get install -y \
@@ -10,6 +10,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - && \
 
 RUN apt-get update && apt-get install yarn -y
 
-COPY . /www/
+COPY . /www
 
 WORKDIR /www/app
