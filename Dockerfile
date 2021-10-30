@@ -33,5 +33,6 @@ WORKDIR /www/app
 # cache
 #RUN php bin/console cache:clear
 
-# droits d'écriture (cache & logs)
+# création répertoire var et droits d'écriture (cache & logs)
+RUN mkdir -p  var
 RUN chmod 777 -R  ./var
