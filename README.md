@@ -58,8 +58,6 @@ http://localhost:8080/
 # docker tips
 
 How to see logs : ```bash docker logs --tail 50 --follow --timestamps symfony-basic-website-001-db-1```
-How to see database users : ```bash docker-compose exec db mysql -uroot -ppassword -e 'SELECT User, Host, Password FROM mysql.user;'```
-How to see database users : ```bash docker-compose exec db mysql -uroot -p -e 'SHOW DATABASES;'```
 
 
 
