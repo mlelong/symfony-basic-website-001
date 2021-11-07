@@ -10,21 +10,17 @@ class FibonacciCalculator
     public function calculateFibonacciNumbers(int $length): bool
     {
         if ($length < 0) {
-            throw new \exception('length should be positive number');    
+            throw new \ErrorException('length should be positive number');
         }
 
-        $this->numbers = [0, 1];
-        
-        if ($length == 0) {
-            unset($this->numbers[1]);
-            return true;
-        }
-        
-        if ($length == 1) {
-            return true;
-        }        
+        $this->numbers = [];
 
-        for($i=2; $i<=$length; $i++) {
+        for($i=0; $i<=$length; $i++) {
+            if ($i < 2) {
+                $this->numbers[$i] = $i;
+                continue;
+            }
+
             $this->numbers[$i] = $this->numbers[$i-1] + $this->numbers[$i-2];
         }
         
