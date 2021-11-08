@@ -16,22 +16,16 @@ class FibonacciCalculatorTest extends KernelTestCase
         $fibonacciCalculator = self::$container->get(FibonacciCalculator::class);
         
         $response = $fibonacciCalculator->calculateFibonacciNumbers(0);
-        $numbers = $fibonacciCalculator->getData();
-        $goodNumbers = [0];
         
         $this->assertTrue($response);
-        $this->assertIsArray($numbers);
-        $this->assertEquals($numbers, $goodNumbers);
+        $this->assertIsArray($fibonacciCalculator->getData());
+        $this->assertEquals($fibonacciCalculator->getData(), [0]);
         
         $fibonacciCalculator->calculateFibonacciNumbers(1);
-        $numbers = $fibonacciCalculator->getData();        
-        $goodNumbers = [0, 1];
-        $this->assertEquals($numbers, $goodNumbers);
+        $this->assertEquals($fibonacciCalculator->getData(), [0, 1]);
         
         $fibonacciCalculator->calculateFibonacciNumbers(10);
-        $numbers = $fibonacciCalculator->getData();        
-        $goodNumbers = [0, 1, 1, 2, 3 , 5, 8, 13, 21,34, 55];
-        $this->assertEquals($numbers, $goodNumbers);
+        $this->assertEquals($fibonacciCalculator->getData(), [0, 1, 1, 2, 3 , 5, 8, 13, 21,34, 55]);
         
     }
     
@@ -39,8 +33,8 @@ class FibonacciCalculatorTest extends KernelTestCase
     {
         $this->expectException(\exception::class);
         
-        $kernel = self::bootKernel();
+        self::bootKernel();
         $fibonacciCalculator = self::$container->get(FibonacciCalculator::class);
-        $response = $fibonacciCalculator->calculateFibonacciNumbers(-1);
+        $fibonacciCalculator->calculateFibonacciNumbers(-1);
     }
 }
