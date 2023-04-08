@@ -5,16 +5,16 @@
 Le test devra être livré via un repository github privé.
 Les travaux devront pouvoir être testable sans aucune modification à apporter au code, ni paramètrage et si besoin en suivant pas a pas une documentation.
 Nous vous demandons d'utiliser Symfony dans sa dernière version stable, de même que tous les outils dont vous aurez besoin.
-​
+
 Exercices à réaliser :
-​
-*ACT-TT1 :* Réaliser une page web qui affichera un échiquier. 
 
-*ACT-TT2 :* Réaliser une commande qui prend en argument un chiffre n et retourne un tableau contenant une suite de Fibonacci de la longueur n. ***Tips** : Ne vous limittez pas à un copié / collé !
+* ACT-TT1 :* Réaliser une page web qui affichera un échiquier. 
 
-*ACT-TT3 :* Réaliser une modélisation d'un candidat, d'une annonce et d'une candidature en utilisant l'orm Doctrine et créer un service qui liste toutes les candidatures par annonce.
+* ACT-TT2 :* Réaliser une commande qui prend en argument un chiffre n et retourne un tableau contenant une suite de Fibonacci de la longueur n. ***Tips** : Ne vous limittez pas à un copié / collé !
 
-*ACT-TT4 :* Réaliser une suite de test unitaire pour les 3 premiers exercices. 
+* ACT-TT3 :* Réaliser une modélisation d'un candidat, d'une annonce et d'une candidature en utilisant l'orm Doctrine et créer un service qui liste toutes les candidatures par annonce.
+
+* ACT-TT4 :* Réaliser une suite de test unitaire pour les 3 premiers exercices. 
  
  
 # installation
